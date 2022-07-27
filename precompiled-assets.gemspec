@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
     'rubygems_mfa_required' => 'true',
     'homepage_uri' => spec.homepage,
     'source_code_uri' => spec.homepage,
-    'changelog_uri' => "#{spec.homepage}/CHANGELOG.md",
+    'changelog_uri' => "#{spec.homepage}/blob/main/CHANGELOG.md",
   }
 
   spec.files = Dir.chdir(__dir__) do
