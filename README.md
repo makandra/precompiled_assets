@@ -21,6 +21,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
+### Configuration
+
 In your `config/application.rb`, configure an `asset_path` which should be in your `public/` directory:
 
 ```ruby
@@ -44,6 +46,27 @@ Once that is set up, `javascript_include_tag('application.js')` or `image_path('
 
 In the `development` Rails environment, the gem detects changes to the manifest and reloads the manifest automatically.
 Hence, your development experience should be similar to other stacks, like with Propshaft or esbuild: You change assets, the manifest changes, Rails will then resolve to the updated asset paths. 🎉
+
+### Accessing manifest or resolver manually
+
+In views, you can use the helper method `asset_resolver` to access the (cached) resolver instance.
+Otherwise, instantiate via `PrecompiledAssets::Resolver.new`.
+
+To resolve an asset path, use `Resolver#resolve`:
+```ruby
+resolver = PrecompiledAssets::Resolver.new
+resolver.resolve('application.js')
+# => "/assets/application-HP2LS2UH.js"
+```
+
+If you want to know if assets were updated (e.g. when using etags), use `Manifest#updated_at`:
+```ruby
+resolver = PrecompiledAssets::Resolver.new
+resolver.manifest.updated_at
+# => (returns a Time instance)
+```
+
+Side note: `Manifest#updated_at` reads its motification time from the file system. If your production environments use a distributed file system, it is not recommended for etagging in production.
 
 
 ## Development

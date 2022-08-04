@@ -19,9 +19,14 @@ module PrecompiledAssets
       digested_paths.include?(path_or_pathname.to_s)
     end
 
+    def updated_at
+      # Not intended for use in production environments.
+      @mtime || fetch_mtime
+    end
+
     def expired?
       # Not intended for use in production environments.
-      @mtime && @mtime != fetch_mtime
+      @time && @time != fetch_mtime
     end
 
     private
