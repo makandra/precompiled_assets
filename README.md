@@ -66,7 +66,7 @@ resolver.manifest.updated_at
 # => (returns a Time instance)
 ```
 
-Side note: `Manifest#updated_at` reads its motification time from the file system. If your production environments use a distributed file system, it is not recommended for etagging in production.
+Side note: `Manifest#updated_at` reads its modification time from the file system. If your production environments use a distributed file system, it is not recommended to use for etagging in production.
 
 
 ## Development

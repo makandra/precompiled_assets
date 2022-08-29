@@ -21,15 +21,17 @@ module PrecompiledAssets
 
     def updated_at
       # Not intended for use in production environments.
-      @mtime || fetch_mtime
+      mtime || fetch_mtime
     end
 
     def expired?
       # Not intended for use in production environments.
-      @time && @time != fetch_mtime
+      mtime && mtime != fetch_mtime
     end
 
     private
+
+    attr_accessor :mtime
 
     def filename
       Rails.configuration.try(:asset_manifest_filename) || DEFAULT_FILENAME
@@ -42,7 +44,7 @@ module PrecompiledAssets
     def parse_manifest
       raise NotFound, "Manifest not found at #{pathname}" unless pathname.exist?
 
-      @mtime = fetch_mtime
+      self.mtime = fetch_mtime
 
       json = pathname.read
       JSON.parse(json)
