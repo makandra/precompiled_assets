@@ -19,6 +19,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
     $ gem install precompiled_assets
 
+If your application uses Sprockets, remove `sprockets-rails` (and possibly `sprockets`) from your `Gemfile` as well as any corresponding initializers, `require` statements, and the `config.assets` configuration settings.
+
 ## Usage
 
 ### Configuration
@@ -27,6 +29,12 @@ In your `config/application.rb`, configure an `asset_path` which should be in yo
 
 ```ruby
 config.asset_path = '/assets'
+```
+
+For the `test` environment, you may want to use a separate path, i.e. in your `config/environments/test.rb` say:
+
+```ruby
+config.asset_path = '/assets-test'
 ```
 
 Inside that path, a `manifest.json` is expected to exist which resolves your undigested input names to digested output paths.
@@ -41,6 +49,8 @@ A manifest file can look like this:
   "images/example.png": "images/example-5N2N2WJM.png"
 }
 ```
+
+The [esbuild-manifest-plugin](https://www.npmjs.com/package/esbuild-manifest-plugin) is one way to generate such a manifest during your build process.
 
 Once that is set up, `javascript_include_tag('application.js')` or `image_path('example.png')` will resolve to their digested filenames and paths.
 
