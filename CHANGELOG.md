@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.3.0] - 2025-09-22
+
+- Support for ViewComponent 4. (ViewComponent 3 support was implicit due to its `ActionView::Base` dependency.)
+
 ## [0.2.1] - 2022-08-29
 
 - Fix reloading expired manifest file.

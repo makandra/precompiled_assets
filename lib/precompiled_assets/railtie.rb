@@ -4,9 +4,12 @@ module PrecompiledAssets
   class Railtie < ::Rails::Railtie
 
     config.after_initialize do
-      ActiveSupport.on_load(:action_view) do
-        require 'precompiled_assets/helper'
-        include PrecompiledAssets::Helper
+      require 'precompiled_assets/helper'
+
+      [:action_view, :view_component].each do |framework|
+        ActiveSupport.on_load(framework) do
+          include PrecompiledAssets::Helper
+        end
       end
     end
 

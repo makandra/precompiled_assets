@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    precompiled_assets (0.2.1)
+    precompiled_assets (0.3.0)
       railties (>= 6.0.0)
 
 GEM
