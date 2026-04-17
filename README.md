@@ -86,10 +86,24 @@ After checking out the repo, run `bin/setup` to install dependencies. You can al
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 
-## Roadmap
+## Running tests
 
-1. Add tests
-2. Integrate into more existing applications to discover new features that we might need.
+The test suite runs against a matrix of Rails versions managed via [Gemika](https://github.com/makandra/gemika). Each `Gemfile.<rails-version>` at the project root is an isolated bundle.
+
+Run the suite against the default (symlinked) `Gemfile`:
+
+```
+bundle exec rspec
+```
+
+Install every matrix bundle and run the full matrix (requires each referenced Ruby version to be available):
+
+```
+bundle exec rake matrix:install
+bundle exec rake matrix:spec
+```
+
+GitHub Actions runs the same matrix on every push and pull request; see `.github/workflows/test.yml`.
 
 
 ## Contributing

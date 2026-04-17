@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+- Add tests to this gem
+- Add CI test matrix for various Rails and Ruby versions
+- Add CI job rubocop linting
+
 ## [0.3.0] - 2025-09-22
 
 - Support for ViewComponent 4. (ViewComponent 3 support was implicit due to its `ActionView::Base` dependency.)

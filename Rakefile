@@ -1,6 +1,13 @@
 require 'bundler/gem_tasks'
-require 'rubocop/rake_task'
+require 'rspec/core/rake_task'
+require 'gemika/tasks'
 
-RuboCop::RakeTask.new
+RSpec::Core::RakeTask.new(:spec)
 
-task default: :rubocop
+if Gem.loaded_specs.include?('rubocop')
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+end
+
+
+task default: 'matrix:spec'
