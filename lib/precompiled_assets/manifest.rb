@@ -29,6 +29,11 @@ module PrecompiledAssets
       mtime && mtime != fetch_mtime
     end
 
+    def inspect
+      truncated_parsed_manifest = "#{@parsed_manifest.to_s[0..7]}..."
+      "<#{self.class.name}:#{object_id} @pathname=#{@pathname.inspect} @parsed_manifest=#{truncated_parsed_manifest}>"
+    end
+
     private
 
     attr_accessor :mtime
